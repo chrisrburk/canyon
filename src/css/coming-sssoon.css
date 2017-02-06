@@ -718,18 +718,19 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
 }
 .main .logo{
     color: #FFFFFF;
-    font-size: 56px;
+    font-size: 82px;
     font-weight: 300;
     position: relative;
     text-align: center;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.33);
     margin-top: 150px;
     z-index: 3;
+    font-family: 'Rubik Mono One', sans-serif;
 }
 .main .logo.cursive{
     font-family: 'Grand Hotel',cursive;
     font-size: 82px;
-    
+
 }
 .main .content{
     position: relative;
