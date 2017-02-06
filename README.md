@@ -1,2 +1,2 @@
-# canyon
-canyon www
+# Canyon Media
+Canyon Media Prototype application
