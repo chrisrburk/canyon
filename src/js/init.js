@@ -30,9 +30,8 @@
           $(formMessages).text(response);
 
           // Clear the form.
-          $('#name').val('');
           $('#email').val('');
-          $('#message').val('');
+          
         }).fail(function(data) {
             console.log('AJAX Failed :(');
             // Make sure that the formMessages div has the 'error' class.
