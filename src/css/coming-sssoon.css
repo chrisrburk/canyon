@@ -842,7 +842,7 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
 }
 
 #form-messages.success {
-  color: green;
+  color: lightgreen;
 }
 
 #video_background {
