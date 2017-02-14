@@ -167,11 +167,35 @@ header {
     position: relative;
     width: 100%;
     min-height: auto;
-    .background-cover;
-    background-position: center;
-    background-image: url('../img/header.jpg');
+    // height: 720px;
+    // .background-cover;
+    // background-position: center;
+    // background-image: url('../img/video_bg.jpg');
     text-align: center;
     color: white;
+    .video-container{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      video{
+        opacity: 0.78;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -100;
+        transform: translateX(-50%) translateY(-50%);
+        background: url('../img/video_bg.jpg') no-repeat;
+        background-size: cover;
+        transition: 1s opacity;
+      }
+    }
     .header-content {
         position: relative;
         text-align: center;
@@ -198,6 +222,9 @@ header {
     }
     @media (min-width: 768px) {
         min-height: 100%;
+        .video-container{
+          video{}
+        }
         .header-content {
             position: absolute;
             top: 50%;
@@ -205,6 +232,7 @@ header {
             -ms-transform: translateY(-50%);
             transform: translateY(-50%);
             padding: 0 50px;
+            z-index: 2;
             .header-content-inner {
                 max-width: 1000px;
                 margin-left: auto;
@@ -222,6 +250,7 @@ header {
         }
     }
 }
+
 
 // Sections
 
