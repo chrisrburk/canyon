@@ -73,6 +73,9 @@ aside {
 
 
 // VIDEO BG
+.video-wrapper {
+  position: relative;
+  overflow: hidden;
   video{
     opacity: 0.58;
     position: fixed;
@@ -87,7 +90,15 @@ aside {
     background: url('../img/video_bg.jpg') no-repeat;
     background-size: cover;
     transition: 1s opacity;
+    display: none;
+    &::-webkit-media-controls {
+        display:none !important;
+    }
   }
+  @media (min-width: 768px) {
+    video{display: block;}
+  }
+}
 
 
 // Navigation
@@ -186,6 +197,9 @@ header {
     position: relative;
     width: 100%;
     min-height: auto;
+    .background-cover;
+    background-position: center;
+    background-image: url('../img/video_bg.jpg');
     text-align: center;
     color: white;
 
@@ -215,9 +229,7 @@ header {
     }
     @media (min-width: 768px) {
         min-height: 100%;
-        .video-container{
-          video{}
-        }
+        background-image: none;
         .header-content {
             position: absolute;
             top: 50%;
