@@ -1,100 +1,98 @@
 var gulp = require('gulp');
-var sass = require('gulp-sass');
+var less = require('gulp-less');
 var browserSync = require('browser-sync').create();
-var useref = require('gulp-useref');
+var header = require('gulp-header');
+var cleanCSS = require('gulp-clean-css');
+var rename = require("gulp-rename");
 var uglify = require('gulp-uglify');
-var gulpIf = require('gulp-if');
-var cssnano = require('gulp-cssnano');
-var imagemin = require('gulp-imagemin');
-var cache = require('gulp-cache');
-var del = require('del');
-var runSequence = require('run-sequence');
-var autoprefixer = require('gulp-autoprefixer');
+var pkg = require('./package.json');
 
+// Set the banner content
+var banner = ['/*!\n',
+    ' * Start Bootstrap - <%= pkg.title %> v<%= pkg.version %> (<%= pkg.homepage %>)\n',
+    ' * Copyright 2013-' + (new Date()).getFullYear(), ' <%= pkg.author %>\n',
+    ' * Licensed under <%= pkg.license.type %> (<%= pkg.license.url %>)\n',
+    ' */\n',
+    ''
+].join('');
 
-//Sass complie function
-gulp.task('sass', function(){
-  return gulp.src('src/scss/**/*.scss')
-    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError)) // Converts Sass to CSS with gulp-sass
-    .pipe(autoprefixer())
-    .pipe(gulp.dest('src/css'))
-    .pipe(browserSync.reload({
-      stream: true
-    }))
+// Compile LESS files from /less into /css
+gulp.task('less', function() {
+    return gulp.src('less/creative.less')
+        .pipe(less())
+        .pipe(header(banner, { pkg: pkg }))
+        .pipe(gulp.dest('css'))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
 });
 
-//Load src into live browser
-gulp.task('load-src', function() {
-  browserSync.init({
-    server: {
-      baseDir: 'src'
-    },
-  })
-})
-
-//Load app into live browser
-gulp.task('load-app', function() {
-  browserSync.init({
-    server: {
-      baseDir: 'app'
-    },
-  })
-})
-
-//Concat/minify all files into on master file in app
-gulp.task('useref', function(){
-  return gulp.src('src/*.html')
-    .pipe(useref())
-    // Minifies only if it's a JavaScript file
-    .pipe(gulpIf('*.js', uglify()))
-    // Minifies only if it's a CSS file
-    .pipe(gulpIf('*.css', cssnano()))
-    .pipe(gulp.dest('app'))
+// Minify compiled CSS
+gulp.task('minify-css', ['less'], function() {
+    return gulp.src('css/creative.css')
+        .pipe(cleanCSS({ compatibility: 'ie8' }))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest('css'))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
 });
 
-//Optimize images
-gulp.task('images', function(){
-  return gulp.src('src/images/**/*.+(png|jpg|jpeg|gif|svg)')
-  // Caching images that ran through imagemin
-  .pipe(cache(imagemin({
-      interlaced: true
-    })))
-  .pipe(gulp.dest('app/images'))
+// Minify JS
+gulp.task('minify-js', function() {
+    return gulp.src('js/creative.js')
+        .pipe(uglify())
+        .pipe(header(banner, { pkg: pkg }))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest('js'))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
 });
 
-//Clear the cache
-gulp.task('cache:clear', function (callback) {
-return cache.clearAll(callback)
+// Copy vendor libraries from /node_modules into /vendor
+gulp.task('copy', function() {
+    gulp.src(['node_modules/bootstrap/dist/**/*', '!**/npm.js', '!**/bootstrap-theme.*', '!**/*.map'])
+        .pipe(gulp.dest('vendor/bootstrap'))
+
+    gulp.src(['node_modules/jquery/dist/jquery.js', 'node_modules/jquery/dist/jquery.min.js'])
+        .pipe(gulp.dest('vendor/jquery'))
+
+    gulp.src(['node_modules/magnific-popup/dist/*'])
+        .pipe(gulp.dest('vendor/magnific-popup'))
+
+    gulp.src(['node_modules/scrollreveal/dist/*.js'])
+        .pipe(gulp.dest('vendor/scrollreveal'))
+
+    gulp.src([
+            'node_modules/font-awesome/**',
+            '!node_modules/font-awesome/**/*.map',
+            '!node_modules/font-awesome/.npmignore',
+            '!node_modules/font-awesome/*.txt',
+            '!node_modules/font-awesome/*.md',
+            '!node_modules/font-awesome/*.json'
+        ])
+        .pipe(gulp.dest('vendor/font-awesome'))
 })
 
-//Move fonts from dev to app
-gulp.task('fonts', function() {
-  return gulp.src('src/fonts/**/*')
-  .pipe(gulp.dest('app/fonts'))
+// Run everything
+gulp.task('default', ['less', 'minify-css', 'minify-js', 'copy']);
+
+// Configure the browserSync task
+gulp.task('browserSync', function() {
+    browserSync.init({
+        server: {
+            baseDir: ''
+        },
+    })
 })
 
-//Clean app folder
-gulp.task('clean:app', function() {
-  return del.sync('app');
-})
-
-//Main watch function which complies sass and launches a browser
-gulp.task('watch', ['load-src','sass'], function(){
-  gulp.watch('src/scss/**/*.scss', ['sass']);
-  // Reloads the browser whenever HTML or JS files change
-  gulp.watch('src/*.html', browserSync.reload);
-  gulp.watch('src/js/**/*.js', browserSync.reload);
-})
-
-gulp.task('default', function (callback) {
-  runSequence(['sass','load-src', 'watch'],
-    callback
-  )
-})
-
-gulp.task('build', function (callback) {
-  runSequence('clean:app',
-    ['sass', 'useref', 'images', 'fonts'],
-    callback
-  )
-})
+// Dev task with browserSync
+gulp.task('dev', ['browserSync', 'less', 'minify-css', 'minify-js'], function() {
+    gulp.watch('less/*.less', ['less']);
+    gulp.watch('css/*.css', ['minify-css']);
+    gulp.watch('js/*.js', ['minify-js']);
+    // Reloads the browser whenever HTML or JS files change
+    gulp.watch('*.html', browserSync.reload);
+    gulp.watch('js/**/*.js', browserSync.reload);
+});

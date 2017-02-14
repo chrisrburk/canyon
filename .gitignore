@@ -1,11 +1,2 @@
-.DS_Store
-.sass-cache
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.psd
-*.zip
-images/
-img/
 node_modules
+bower_components
