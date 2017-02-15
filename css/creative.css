@@ -445,11 +445,14 @@ body {
   webkit-tap-highlight-color: #272727;
 }
 #work {
-  background: url('../img/campfire-wide-bg.jpg') center center no-repeat;
+  background: url('../img/work-bg.jpg') center center no-repeat;
 }
 #about {
   background: url('../img/who-bg.jpg') center center no-repeat;
 }
-#call-to-action {
+#services {
+  background: url('../img/service-bg.jpg') center center no-repeat;
+}
+#contact {
   background: url('../img/canyon-bg.jpg') center center no-repeat;
 }
