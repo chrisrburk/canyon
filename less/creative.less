@@ -351,7 +351,9 @@ header {
 
 // Button Styles
 .btn-default {
-    .button-variant(@gray-darker;white;white);
+    .button-variant(white;white;white);
+    background: none;
+    border: 3px solid #fff;
 }
 
 .btn-primary {
@@ -360,7 +362,7 @@ header {
 
 .btn {
     .sans-serif-font;
-    border: none;
+    // border: none;
     border-radius: 300px;
     font-weight: 700;
     text-transform: uppercase;
@@ -396,4 +398,15 @@ img::-moz-selection {
 
 body {
     webkit-tap-highlight-color: @gray-darker;
+}
+
+// Custom Styles
+#work{
+  background: url('../img/campfire-wide-bg.jpg') center center no-repeat;
+}
+#about{
+  background: url('../img/who-bg.jpg') center center no-repeat;
+}
+#call-to-action{
+  background: url('../img/canyon-bg.jpg') center center no-repeat;
 }

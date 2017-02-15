@@ -317,12 +317,14 @@ header .header-content .header-content-inner p {
   padding-left: 0;
 }
 .btn-default {
-  color: #272727;
+  color: white;
   background-color: white;
   border-color: white;
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
+  background: none;
+  border: 3px solid #fff;
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -330,7 +332,7 @@ header .header-content .header-content-inner p {
 .btn-default:active,
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
-  color: #272727;
+  color: white;
   background-color: #f2f2f2;
   border-color: #ededed;
 }
@@ -362,7 +364,7 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-default .badge {
   color: white;
-  background-color: #272727;
+  background-color: white;
 }
 .btn-primary {
   color: white;
@@ -414,7 +416,6 @@ fieldset[disabled] .btn-primary.active {
 }
 .btn {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-  border: none;
   border-radius: 300px;
   font-weight: 700;
   text-transform: uppercase;
@@ -442,4 +443,13 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: #272727;
+}
+#work {
+  background: url('../img/campfire-wide-bg.jpg') center center no-repeat;
+}
+#about {
+  background: url('../img/who-bg.jpg') center center no-repeat;
+}
+#call-to-action {
+  background: url('../img/canyon-bg.jpg') center center no-repeat;
 }
