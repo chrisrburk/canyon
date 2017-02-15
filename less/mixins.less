@@ -13,7 +13,7 @@
     -o-background-size: cover;
 }
 
-.button-variant(@color; @background; @border) {
+.button-variant(@color; @background; @border; @hover) {
 	color: @color;
 	background-color: @background;
 	border-color: @border;
@@ -25,7 +25,7 @@
 	&:active,
 	&.active,
 	.open > .dropdown-toggle& {
-		color: @color;
+		color: @hover;
 		background-color: darken(@background, 5%);
 	    border-color: darken(@border, 7%);
 	}
