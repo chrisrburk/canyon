@@ -1,2 +1,17 @@
 node_modules
 bower_components
+.DS_Store
+.sass-cache
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.psd
+*.zip
+*.mp4
+*.webm
+images/
+img/
+vid/
+mocks
+node_modules
