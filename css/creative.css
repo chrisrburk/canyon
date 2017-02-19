@@ -262,7 +262,7 @@ header .header-content .header-content-inner p {
   color: white;
   opacity: 0;
   display: block;
-  background: rgba(255, 87, 34, 0.9);
+  background: rgba(255, 152, 0, 0.5);
   position: absolute;
   bottom: 0;
   text-align: center;
@@ -443,10 +443,6 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: #272727;
-}
-.popup-gallery a:hover,
-.popup-gallery a:focus {
-  color: #ee3900;
 }
 .popup-gallery .img-thumb {
   opacity: .7;
