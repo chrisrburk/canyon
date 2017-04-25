@@ -326,7 +326,7 @@ header .header-content .header-content-inner p {
   padding: 100px 0;
   text-align: center;
   color: white;
-  background: black;
+  background: #272727;
 }
 .portfolio-modal .modal-content h2 {
   margin: 0;
@@ -519,9 +519,6 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #272727;
 }
-.popup-gallery .img-thumb {
-  opacity: .7;
-}
 #portfolio .portfolio-item {
   margin: 0 0 15px;
   right: 0;
@@ -533,7 +530,7 @@ body {
   margin: 0 auto;
 }
 #portfolio .portfolio-item .portfolio-link .caption {
-  background: rgba(255, 87, 34, 0.9);
+  background: rgba(255, 87, 34, 0);
   position: absolute;
   width: 100%;
   height: 100%;

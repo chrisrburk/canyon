@@ -354,7 +354,7 @@ header {
 	    padding: 100px 0;
 	    text-align: center;
 			color: white;
-			background: black;
+			background: @gray-darker;
 		h2 {
 	    	margin: 0;
 	    	font-size: 3em;
@@ -478,11 +478,6 @@ body {
     webkit-tap-highlight-color: @gray-darker;
 }
 
-.popup-gallery{
-  .img-thumb{
-    opacity: .7;
-  }
-}
 #portfolio {
     .portfolio-item {
         margin: 0 0 15px;
@@ -493,7 +488,7 @@ body {
             max-width: 400px;
             margin: 0 auto;
             .caption {
-                background: fade(@theme-primary, 90%);
+                background: fade(@theme-primary, 0%);
                 position: absolute;
                 width: 100%;
                 height: 100%;
